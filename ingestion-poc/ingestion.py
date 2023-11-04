@@ -8,8 +8,9 @@ import time
 import tiktoken
 import argparse
 import os
+import pinecone
 
-from langchain.vectorstores import Chroma
+from langchain.vectorstores import Pinecone
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 from langchain.document_loaders import UnstructuredMarkdownLoader
@@ -22,6 +23,7 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 RESOURCE_ENDPOINT = os.getenv("OPENAI_API_BASE")
 
 TOKENIZER = tiktoken.get_encoding('p50k_base')
+INDEX_NAME = "hackaton-anthropic"
 
 
 def parse():
@@ -72,28 +74,17 @@ def upload_documents_to_vector_db(documents, embeddings_model, vector_db_dir):
     print("\nStart uploading documents")
     
     # Initialise Chroma DB and documents uploading
-    embeddings = OpenAIEmbeddings(model=embeddings_model, chunk_size=1)
-    vectordb = Chroma(embedding_function=embeddings, persist_directory=vector_db_dir)
-        
-    texts = [doc.page_content for doc in documents]
-    metadatas = [doc.metadata for doc in documents]
-    
-    # Add documents in batches to avoid rate limit (40,000 tokens per minute)
-    assert len(texts) == len(metadatas)
-    for idx in range(len(texts)):
-        print(f"Uploading file: {idx+1}/{len(texts)}")
-        print(f"Number of tokens: {tiktoken_len(texts[idx])}")
-        vectordb.add_texts(texts=[texts[idx]], metadatas=[metadatas[idx]])
+    embeddings = OpenAIEmbeddings(deployment_id=embeddings_model, 
+                                  chunk_size=1,
+                                  openai_api_key=API_KEY,
+                                  openai_api_base=RESOURCE_ENDPOINT)
 
-        if idx + 1 % 100 == 0:
-            print('Waiting 1 minute to avoid the rate limit')
-            time.sleep(10)
-
-    print("\nFinish uploading documents")
-    
-    vectordb.persist()
-    print("Embeddings persisted in Vector DB")
-
+    # Instantiate Pinecone client
+    pinecone.init(api_key=os.getenv("PINECONE_API_KEY"),
+                  environment=os.getenv("PINECONE_ENV")
+                  )
+    docsearch = Pinecone.from_documents(documents, embeddings, index_name=INDEX_NAME)
+    print('finish')
     return 
 
 
@@ -104,7 +95,8 @@ def split_documents(documents_dir: str):
     
     # Splitter
     headers_to_split_on = [
-    ("##", "Header 2")
+    ("#", "Title"),
+    ("##", "Subtitle")
     ]
     markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
     
