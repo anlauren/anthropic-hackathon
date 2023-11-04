@@ -1,8 +1,9 @@
-import { Grid } from "@chakra-ui/react";
+import { Center, Grid } from "@chakra-ui/react";
 import { UploadComponent } from "../../components/UploadComponent";
 import { useState } from "react";
 import { FileTable } from "../../components/FileTable";
 import { fakeKnowledgebase } from "../../fakeData";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -23,6 +24,9 @@ export const ProjectPage = () => {
 
   return (
     <Grid p={6}>
+      <Center>
+        <Breadcrumbs />
+      </Center>
       <UploadComponent
         file={file}
         onFileChange={(file) => handleFileChange(file)}
