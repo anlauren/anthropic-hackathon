@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CurrentView, Breadcrumbs } from "../../components/Breadcrumbs";
 import { KnowledgeContainer } from "../Knowledge";
 import { ExamContainer } from "../Exam";
+import { QuestionsContainer } from "../Question";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -42,6 +43,9 @@ export const ProjectPage = () => {
           onExamFileUpload={() => handleFileUpload}
         />
       );
+    }
+    if (currentView === CurrentView.Questions) {
+      return <QuestionsContainer />;
     }
   };
 
