@@ -33,8 +33,11 @@ export const ExamContainer: React.FC<ExamProps> = ({
         placeholder="Type your past exam here..."
         onChange={(e) => onTypeExamQuestion(e.target.value)}
       />
+      <Grid></Grid>
+      <Button colorScheme="teal" onClick={onClickSubmitExam}>
+        Submit past exam questions
+      </Button>
     </Grid>
-    <Button onClick={onClickSubmitExam}>Submit exam</Button>
     <FileTable
       data={fakeKnowledgebaseHistory}
       onDelete={(fileId) => onExamDelete && onExamDelete(fileId)}

@@ -31,7 +31,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   ];
 
   return (
-    <Breadcrumb separator={<ChevronRightIcon color="gray.500" />}>
+    <Breadcrumb separator={<ChevronRightIcon color="gray.500" />} pb={10}>
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem key={index}>
           <BreadcrumbLink

@@ -46,7 +46,7 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
   };
 
   return (
-    <Center p={10}>
+    <Center>
       <Box
         p={5}
         shadow="md"

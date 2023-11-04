@@ -26,7 +26,7 @@ export interface FileTableProps {
 
 export const FileTable: React.FC<FileTableProps> = ({ data, onDelete }) => {
   return (
-    <Box overflowX="auto">
+    <Box overflowX="auto" pt={10}>
       <Table variant="simple">
         <Thead>
           <Tr>
