@@ -1,6 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
-from app.services.user.service import UserService
-from app.services.user.schema import User, UserInput
+from fastapi import APIRouter
 from app.services.question_generator.service import QuestionGeneratorService
 
 router = APIRouter()
