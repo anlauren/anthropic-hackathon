@@ -1,7 +1,7 @@
-import { Flex, Grid, Input } from "@chakra-ui/react";
 import { FileTable } from "../../components/FileTable";
 import { UploadComponent } from "../../components/UploadComponent";
 import { fakeKnowledgebaseHistory } from "../../fakeData";
+import { Button, Grid, Input, Textarea } from "@chakra-ui/react";
 
 export interface ExamProps {
   examFile: File | null;
@@ -19,19 +19,21 @@ export const ExamContainer: React.FC<ExamProps> = ({
   onExamDelete,
 }) => (
   <Grid>
-    <Flex alignItems="center" justifyContent="space-between">
+    <Grid templateColumns="repeat(2, 1fr)" gap={6}>
       <UploadComponent
         file={examFile}
         onFileChange={(file) => onExamFileChange(file)}
         onUpload={() => onExamFileUpload()}
       />
-      <Input
+      <Textarea
+        pt={10}
+        rows={4} // Set the number of lines you want to show by default
+        placeholder="Type your question here..."
         onChange={(e) => onTypeExamQuestion(e.target.value)}
-        width="auto"
-        flex="1"
-        marginLeft="4"
       />
-    </Flex>
+    </Grid>
+
+    <Button>Submit exam</Button>
     <FileTable
       data={fakeKnowledgebaseHistory}
       onDelete={(fileId) => onExamDelete && onExamDelete(fileId)}
