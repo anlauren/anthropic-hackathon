@@ -1,6 +1,6 @@
+import pinecone
 import os
 import openai
-import pinecone
 
 from langchain.vectorstores import Pinecone
 from langchain.embeddings import OpenAIEmbeddings
@@ -18,11 +18,20 @@ openai.api_key = API_KEY
 openai.api_base = RESOURCE_ENDPOINT 
 
 INDEX_NAME = "hackaton-anthropic"
-EMBEDDINGS_MODEL = "text-embedding-ada-002"
+
 text_field = "text"
 
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"),environment=os.getenv("PINECONE_ENV"))
+
+
+EMBEDDINGS_MODEL = "text-embedding-ada-002"
+import pdb; pdb.set_trace()
+
+# switch back to normal index for langchain
+pinecone.init(api_key=os.getenv("PINECONE_API_KEY"),
+                environment=os.getenv("PINECONE_ENV")
+                  )
 index = pinecone.Index(INDEX_NAME)
+print(index.describe_index_stats())
 
 embeddings = OpenAIEmbeddings(deployment_id=EMBEDDINGS_MODEL, 
                                 chunk_size=1,
@@ -30,10 +39,8 @@ embeddings = OpenAIEmbeddings(deployment_id=EMBEDDINGS_MODEL,
                                 openai_api_base=RESOURCE_ENDPOINT
                                 )
 
-class ContentMatchingService:
+vectorstore = Pinecone(index, embeddings.embed_query, text_field)
+query = "What is the name of the period between 3000 B.C. and 1200 B.C. when bronze became widely used?"
 
-  def get_content_related_to_question(self, question: str) -> str:
-    vectorstore = Pinecone(index, embeddings.embed_query, text_field)
-
-    docs = vectorstore.similarity_search(question)
-    return docs[0].page_content
+docs = vectorstore.similarity_search(query)
+print(docs[0].page_content)

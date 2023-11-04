@@ -4,7 +4,7 @@ import json
 import os
 from typing import List, TypedDict
 
-print("ANTHROPIC API KEY", os.environ)
+
 anthropic = Anthropic(
     api_key=os.environ.get("ANTHROPIC_API_KEY"),
 )
@@ -72,6 +72,7 @@ class QuestionGeneratorService:
     for question in questions:
       print("Asking for question", question)
       content = self.content_matching_service.get_content_related_to_question(question)
+      print(content)
       question_content_pairs.append({"question": question, "content": content})
     
     new_questions = []
