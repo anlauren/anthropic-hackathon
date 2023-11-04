@@ -34,18 +34,21 @@ export const previousProject: ProjectProps[] = [
 
 export const fakeKnowledgebase: FileData[] = [
   {
+    fileId: "1",
     title: "History book on WorlWar 2 by Anthony Collins",
     description: "string",
     fileName: "collins.pdf",
     dateOfUpload: "10-Aug-2023",
   },
   {
+    fileId: "2",
     title: "WorlWar 2 by Mark Twee",
     description: "string",
     fileName: "twee.pdf",
     dateOfUpload: "11-Aug-2023",
   },
   {
+    fileId: "3",
     title: "USA during WW2 by Josh Omak",
     description: "string",
     fileName: "omak.pdf",

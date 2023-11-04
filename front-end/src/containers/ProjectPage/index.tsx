@@ -17,6 +17,10 @@ export const ProjectPage = () => {
     console.log(file);
   };
 
+  const handleDelete = (fileId) => {
+    alert(fileId);
+  };
+
   return (
     <Grid>
       <UploadComponent
@@ -24,7 +28,10 @@ export const ProjectPage = () => {
         onFileChange={(file) => handleFileChange(file)}
         onUpload={handleFileUpload}
       />
-      <FileTable data={fakeKnowledgebase} />
+      <FileTable
+        data={fakeKnowledgebase}
+        onDelete={(fileId) => handleDelete(fileId)}
+      />
     </Grid>
   );
 };

@@ -12,6 +12,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 
 export interface FileData {
+  fileId: string;
   title: string;
   description: string;
   fileName: string;
@@ -20,7 +21,7 @@ export interface FileData {
 
 export interface FileTableProps {
   data: FileData[];
-  onDelete: (fileName: string) => void; // Assuming the delete function needs only the file name to delete
+  onDelete: (fileId: string) => void; // Assuming the delete function needs only the file name to delete
 }
 
 export const FileTable: React.FC<FileTableProps> = ({ data, onDelete }) => {
@@ -47,7 +48,7 @@ export const FileTable: React.FC<FileTableProps> = ({ data, onDelete }) => {
                 <IconButton
                   aria-label="Delete file"
                   icon={<DeleteIcon />}
-                  onClick={() => onDelete(file.fileName)}
+                  onClick={() => onDelete(file.fileId)}
                 />
               </Td>
             </Tr>
