@@ -30,6 +30,10 @@ export const ProjectPage = () => {
     setCurrentView(view);
   };
 
+  const handleClickSubmitExam = () => {
+    setCurrentView(CurrentView.Questions);
+  };
+
   const viewToDisplay = (currentView: CurrentView) => {
     if (currentView === CurrentView.Knowledge) {
       return (
@@ -49,6 +53,7 @@ export const ProjectPage = () => {
           onTypeExamQuestion={(myExamQuestion) =>
             handleTypeExamQuestion(myExamQuestion)
           }
+          onClickSubmitExam={handleClickSubmitExam}
         />
       );
     }
