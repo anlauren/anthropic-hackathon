@@ -2,7 +2,7 @@
 
 class ContentMatchingService:
 
-  def get(question: str) -> str:
+  def get_content_related_to_question(question: str) -> str:
     return "EXAMPLE MATCHING CONTENT"
   
   
