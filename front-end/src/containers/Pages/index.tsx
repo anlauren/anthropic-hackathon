@@ -8,7 +8,7 @@ export const AvailablePage = {
   Project: "/projects/:projectId",
 };
 
-export const Pages = () => {
+export const Pages: React.FC = () => {
   return (
     <Routes>
       <Route path={AvailablePage.HomePage} element={<HomePage />} />

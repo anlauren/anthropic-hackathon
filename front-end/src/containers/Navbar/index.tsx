@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Flex, Image, Avatar } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { AvailablePage } from "../Pages";
+import MyLogo from "../../assets/logo.png";
 
 export const NavbarContainer = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       as="nav"
@@ -12,17 +17,21 @@ export const NavbarContainer = () => {
       bg="teal.500"
       color="white"
     >
-      {/* Logo on the left */}
-      <Flex align="center" mr={5}>
-        <Image src="/path-to-your-logo.png" alt="Logo" boxSize="50px" />
+      <Flex
+        align="center"
+        mr={5}
+        onClick={() => navigate(AvailablePage.HomePage)}
+        _hover={{ cursor: "pointer" }}
+      >
+        <Image src={MyLogo} alt="Logo" boxSize="50px" />
       </Flex>
 
-      {/* Profile image on the right */}
       <Box>
         <Avatar
           size="md"
           name="Profile Name"
           src="/path-to-your-profile-image.jpg"
+          _hover={{ cursor: "pointer" }}
         />
       </Box>
     </Flex>
