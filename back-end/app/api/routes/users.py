@@ -5,7 +5,7 @@ from app.services.user.schema import User, UserInput
 router = APIRouter()
 
 
-@router.get("/{user_id}", response_model=User)
+@router.get("/{user_id}", response_model=User, summary="Get user by id - new")
 def get_user(user_id: str):
     user_service = UserService()
     user = user_service.get(user_id)
