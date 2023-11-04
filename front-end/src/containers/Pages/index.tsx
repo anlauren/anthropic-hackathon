@@ -12,7 +12,7 @@ export const Pages = () => {
   return (
     <Routes>
       <Route path={AvailablePage.HomePage} element={<HomePage />} />
-      <Route path={AvailablePage.HomePage} element={<ProjectPage />} />
+      <Route path={AvailablePage.Project} element={<ProjectPage />} />
     </Routes>
   );
 };
