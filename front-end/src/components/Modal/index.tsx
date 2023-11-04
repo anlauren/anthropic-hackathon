@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Modal as ChakraModal,
   ModalOverlay,
@@ -15,22 +15,23 @@ import {
 
 export interface ModalProps {
   isOpen: boolean;
+  title: string;
+  description: string;
   onClose: () => void;
   onSave: (title: string, description: string) => void;
+  onChangeTitle: (inputString: string) => void;
+  onChangeDescription: (inputString: string) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDescription(e.target.value);
-  };
-
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  title,
+  description,
+  onClose,
+  onSave,
+  onChangeTitle,
+  onChangeDescription,
+}) => {
   const handleSave = () => {
     onSave(title, description);
     onClose(); // Close the modal after save
@@ -48,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
             <Input
               placeholder="Title"
               value={title}
-              onChange={handleTitleChange}
+              onChange={(e) => onChangeTitle(e.target.value)}
             />
           </FormControl>
 
@@ -57,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
             <Input
               placeholder="Description"
               value={description}
-              onChange={handleDescriptionChange}
+              onChange={(e) => onChangeDescription(e.target.value)}
             />
           </FormControl>
         </ModalBody>

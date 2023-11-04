@@ -4,10 +4,14 @@ import { Box, Button, Grid } from "@chakra-ui/react";
 import { previousProject } from "../../fakeData";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const [isModalProjectOpen, setIsModalProjectOpen] = useState<boolean>(false);
-  // Function placeholders for edit and delete handlers
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+
   const handleEdit = () => {
     // Placeholder function for edit functionality
   };
@@ -28,9 +32,15 @@ export const HomePage = () => {
         </Button>
       </Box>
       <Modal
+        title={title}
+        description={description}
         isOpen={isModalProjectOpen}
         onClose={() => setIsModalProjectOpen(false)}
-        onSave={() => {}}
+        onSave={() => {
+          navigate(`/projects/${uuidv4()}`);
+        }}
+        onChangeTitle={(inputString) => setTitle(inputString)}
+        onChangeDescription={(inputString) => setDescription(inputString)}
       />
       <Grid>
         {previousProject.map((project, index) => (
