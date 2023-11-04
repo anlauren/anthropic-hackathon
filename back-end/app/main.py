@@ -20,7 +20,7 @@ origins = [os.environ.get("ALLOWED_ORIGINS")]
 app.add_middleware(
     CORSMiddleware,
     allow_methods=["*"],
-    allow_origins=origins,
+    allow_origins="*",
     allow_credentials=True,
     allow_headers=["*"],
     expose_headers=["*"]

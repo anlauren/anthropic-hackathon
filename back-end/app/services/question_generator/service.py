@@ -13,9 +13,12 @@ def generate_question_extraction_prompt(base_questions_as_text: str) -> str:
 
 def generate_new_question_based_on_content_prompt(content: str, question: str) -> str:
   return f"""{HUMAN_PROMPT}
-    <document>{content} </document>
-    <question>{question} </question>
-    Above is a document and a question related to that document. Please write a new question that is related to the document in the same style.{AI_PROMPT}
+    <document>{content}</document>
+    <question>{question}</question>
+    Above is a document and a question related to that document. 
+    Please write a new question that is related to the document in the same style.
+    do not include the document or the original question in your answer.
+    {AI_PROMPT}
     Here are the questions:
 """
 
