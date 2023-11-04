@@ -6,7 +6,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.routes import users, question_generator
+from app.api.routes import users, question_generator, knowledge
 
 # Define application
 app = FastAPI(
@@ -20,7 +20,7 @@ origins = [os.environ.get("ALLOWED_ORIGINS")]
 app.add_middleware(
     CORSMiddleware,
     allow_methods=["*"],
-    allow_origins=origins,
+    allow_origins="*",
     allow_credentials=True,
     allow_headers=["*"],
     expose_headers=["*"]
@@ -29,6 +29,7 @@ app.add_middleware(
 # Routers
 app.include_router(users.router, prefix="/users", tags=["Users"])
 app.include_router(question_generator.router, prefix="/question_generator", tags=["Question Generator"])
+app.include_router(knowledge.router, prefix="/knowledge", tags=["Knowledge"])
 
 @app.get("/")
 async def health_check():
