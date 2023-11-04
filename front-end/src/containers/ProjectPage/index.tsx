@@ -17,12 +17,12 @@ export const ProjectPage = () => {
     console.log(file);
   };
 
-  const handleDelete = (fileId) => {
+  const handleDelete = (fileId: string) => {
     alert(fileId);
   };
 
   return (
-    <Grid>
+    <Grid p={6}>
       <UploadComponent
         file={file}
         onFileChange={(file) => handleFileChange(file)}
