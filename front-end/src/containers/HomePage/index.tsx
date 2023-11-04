@@ -1,29 +1,12 @@
-import Project, { ProjectProps } from "../../components/Project";
-import { Box, Button, Grid, GridItem } from "@chakra-ui/react";
+import Modal from "../../components/Modal";
+import Project from "../../components/Project";
+import { Box, Button, Grid } from "@chakra-ui/react";
+import { previousProject } from "../../fakeData";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const HomePage = () => {
-  const previousProject: ProjectProps[] = [
-    {
-      title: "Calculus",
-      description:
-        "Comprehensive material covering Calculus I through III, from the fundamentals to advanced integration techniques, for the academic years 2020 to 2023.",
-    },
-    {
-      title: "Linear Algebra",
-      description:
-        "Course content including matrix theory, vector spaces, and linear transformations, compiled for students enrolled between 2020 to 2023 in MATH2364.",
-    },
-    {
-      title: "Hardware Fundamentals",
-      description:
-        "A complete overview of computer hardware components, system architecture, and design principles taught in COMP2712 from 2020 to 2023.",
-    },
-    {
-      title: "Modern History",
-      description:
-        "An extensive collection of study materials, lectures, and scholarly articles for the course HIST3327 on Modern History, covering the period from 2020 to 2023.",
-    },
-  ];
+  const [isModalProjectOpen, setIsModalProjectOpen] = useState<boolean>(false);
   // Function placeholders for edit and delete handlers
   const handleEdit = () => {
     // Placeholder function for edit functionality
@@ -34,24 +17,31 @@ export const HomePage = () => {
   };
 
   const handleAddNewProject = () => {
-    // Placeholder function for adding a new project
+    setIsModalProjectOpen(true);
   };
 
   return (
-    <Box>
+    <Box p={10}>
       <Box display="flex" justifyContent="flex-end" mb={4}>
         <Button onClick={handleAddNewProject} colorScheme="teal">
           Add New Project
         </Button>
       </Box>
+      <Modal
+        isOpen={isModalProjectOpen}
+        onClose={() => setIsModalProjectOpen(false)}
+        onSave={() => {}}
+      />
       <Grid>
         {previousProject.map((project, index) => (
           <Grid key={index} pt={6}>
             <Project
+              projectId={project.projectId}
               title={project.title}
               description={project.description}
               onEdit={handleEdit}
               onDelete={handleDelete}
+              createdAt={project.createdAt}
             />
           </Grid>
         ))}
