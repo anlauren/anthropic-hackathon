@@ -33,6 +33,15 @@ export const ProjectPage = () => {
         />
       );
     }
+    if (currentView === CurrentView.Exams) {
+      return (
+        <KnowledgeContainer
+          knowledgeFile={file}
+          onKnowledgeFileChange={handleFileChange}
+          onKnowledgeFileUpload={() => handleFileUpload}
+        />
+      );
+    }
   };
 
   return (

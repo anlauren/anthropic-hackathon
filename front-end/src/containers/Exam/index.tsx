@@ -3,14 +3,14 @@ import { UploadComponent } from "../../components/UploadComponent";
 import { fakeKnowledgebase } from "../../fakeData";
 import { Grid } from "@chakra-ui/react";
 
-export interface KnowledgeProps {
+export interface examProps {
   knowledgeFile: File | null;
   onKnowledgeFileChange: (file: File | null) => void;
   onKnowledgeFileUpload: () => void;
   onKnowledgeDelete?: (fileId: string) => void;
 }
 
-export const KnowledgeContainer: React.FC<KnowledgeProps> = ({
+export const KnowledgeContainer: React.FC<examProps> = ({
   knowledgeFile,
   onKnowledgeFileChange,
   onKnowledgeFileUpload,
