@@ -1,6 +1,8 @@
 import { Grid } from "@chakra-ui/react";
 import { UploadComponent } from "../../components/UploadComponent";
 import { useState } from "react";
+import { FileTable } from "../../components/FileTable";
+import { fakeKnowledgebase } from "../../fakeData";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -22,6 +24,7 @@ export const ProjectPage = () => {
         onFileChange={(file) => handleFileChange(file)}
         onUpload={handleFileUpload}
       />
+      <FileTable data={fakeKnowledgebase} />
     </Grid>
   );
 };

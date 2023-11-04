@@ -1,3 +1,4 @@
+import { FileData } from "./components/FileTable";
 import { ProjectProps } from "./components/Project";
 
 export const previousProject: ProjectProps[] = [
@@ -28,5 +29,26 @@ export const previousProject: ProjectProps[] = [
     title: "Modern History",
     description:
       "An extensive collection of study materials, lectures, and scholarly articles for the course HIST3327 on Modern History, covering the period from 2020 to 2023.",
+  },
+];
+
+export const fakeKnowledgebase: FileData[] = [
+  {
+    title: "History book on WorlWar 2 by Anthony Collins",
+    description: "string",
+    fileName: "collins.pdf",
+    dateOfUpload: "10-Aug-2023",
+  },
+  {
+    title: "WorlWar 2 by Mark Twee",
+    description: "string",
+    fileName: "twee.pdf",
+    dateOfUpload: "11-Aug-2023",
+  },
+  {
+    title: "USA during WW2 by Josh Omak",
+    description: "string",
+    fileName: "omak.pdf",
+    dateOfUpload: "09-Aug-2023",
   },
 ];
