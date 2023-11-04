@@ -12,6 +12,6 @@ docker run -it \
   -e OPENAI_API_BASE="${OPENAI_API_BASE}" \
   -e PINECONE_API_KEY="${PINECONE_API_KEY}" \
   -e PINECONE_ENV="${PINECONE_ENV}" \
-  -p 5000:8008 \
+  -p 5001:8008 \
   -v $(pwd):/code \
   $DOCKER_IMAGE

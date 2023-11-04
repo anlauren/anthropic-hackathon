@@ -7,6 +7,7 @@ export interface ProjectProps {
   title: string;
   description: string;
   createdAt: string;
+  onClickProject?: () => void;
   onEdit?: () => void; // Replace with the actual type of your event handler
   onDelete?: () => void; // Replace with the actual type of your event handler
 }
@@ -16,6 +17,7 @@ const Project: React.FC<ProjectProps> = ({
   title,
   description,
   createdAt,
+  onClickProject,
   onEdit,
   onDelete,
 }) => {
@@ -28,6 +30,7 @@ const Project: React.FC<ProjectProps> = ({
       cursor="pointer"
       _hover={{ boxShadow: "lg" }}
       id={projectId}
+      onClick={onClickProject}
     >
       <Flex justify="space-between" align="center">
         {/* Left part - Title and Description */}

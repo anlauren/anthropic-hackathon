@@ -52,6 +52,7 @@ export const HomePage = () => {
               onEdit={handleEdit}
               onDelete={handleDelete}
               createdAt={project.createdAt}
+              onClickProject={() => navigate(`/projects/${project.projectId}`)}
             />
           </Grid>
         ))}
