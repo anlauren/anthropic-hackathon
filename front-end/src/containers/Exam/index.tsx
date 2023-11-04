@@ -3,29 +3,29 @@ import { UploadComponent } from "../../components/UploadComponent";
 import { fakeKnowledgebase } from "../../fakeData";
 import { Grid } from "@chakra-ui/react";
 
-export interface examProps {
-  knowledgeFile: File | null;
-  onKnowledgeFileChange: (file: File | null) => void;
-  onKnowledgeFileUpload: () => void;
-  onKnowledgeDelete?: (fileId: string) => void;
+export interface ExamProps {
+  examFile: File | null;
+  onExamFileChange: (file: File | null) => void;
+  onExamFileUpload: () => void;
+  onExamDelete?: (fileId: string) => void;
 }
 
-export const KnowledgeContainer: React.FC<examProps> = ({
-  knowledgeFile,
-  onKnowledgeFileChange,
-  onKnowledgeFileUpload,
-  onKnowledgeDelete,
+export const KnowledgeContainer: React.FC<ExamProps> = ({
+  examFile,
+  onExamFileChange,
+  onExamFileUpload,
+  onExamDelete,
 }) => {
   return (
     <Grid>
       <UploadComponent
-        file={knowledgeFile}
-        onFileChange={(file) => onKnowledgeFileChange(file)}
-        onUpload={() => onKnowledgeFileUpload()}
+        file={examFile}
+        onFileChange={(file) => onExamFileChange(file)}
+        onUpload={() => onExamFileUpload()}
       />
       <FileTable
         data={fakeKnowledgebase}
-        onDelete={(fileId) => onKnowledgeDelete && onKnowledgeDelete(fileId)}
+        onDelete={(fileId) => onExamDelete && onExamDelete(fileId)}
       />
     </Grid>
   );
