@@ -3,3 +3,5 @@ front-end/package-lock.json
 back-end/.env
 **/__pycache__/
 *.pyc
+__idea__/
+back-end/.venv/
