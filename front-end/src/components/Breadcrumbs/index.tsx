@@ -31,8 +31,9 @@ export const Breadcrumbs: React.FC = () => {
         <BreadcrumbItem key={index} isCurrentPage={pathname === item.path}>
           <BreadcrumbLink
             as={Link}
-            to={item.path}
             fontWeight={pathname === item.path ? "bold" : "normal"}
+            fontSize="2xl"
+            color="teal.600"
           >
             {item.label}
           </BreadcrumbLink>
