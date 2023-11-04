@@ -1,10 +1,9 @@
 pydantic==1.10.2
-chromadb==0.3.18
-unstructured==0.5.8
-pyMuPDF==1.22.3
-pyPDF2==3.0.1
-pytesseract==0.3.10
-langchain==0.0.188
+# unstructured==0.5.8
+# pyMuPDF==1.22.3
+# pyPDF2==3.0.1
+# pytesseract==0.3.10
+langchain==0.0.330
 anthropic
 openai==0.28.1
 python-dotenv==0.20.0
@@ -13,3 +12,6 @@ openpyxl==3.1.2
 numpy==1.23.0
 nltk==3.8.1
 SQLAlchemy==2.0.23
+pinecone-client==2.2.4
+typing-inspect==0.8.0
+typing_extensions==4.5.0
