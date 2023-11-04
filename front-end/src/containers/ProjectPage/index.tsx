@@ -1,12 +1,13 @@
 import { Center, Grid } from "@chakra-ui/react";
-import { UploadComponent } from "../../components/UploadComponent";
 import { useState } from "react";
-import { FileTable } from "../../components/FileTable";
-import { fakeKnowledgebase } from "../../fakeData";
-import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { CurrentView, Breadcrumbs } from "../../components/Breadcrumbs";
+import { KnowledgeContainer } from "../Knowledge";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
+  const [currentView, setCurrentView] = useState<CurrentView>(
+    CurrentView.Knowledge
+  );
 
   const handleFileChange = (file: File | null) => {
     if (file) {
@@ -14,28 +15,36 @@ export const ProjectPage = () => {
     }
   };
 
-  const handleFileUpload = () => {
-    console.log(file);
+  const handleFileUpload = (fileId: string) => {
+    alert(fileId);
   };
 
-  const handleDelete = (fileId: string) => {
-    alert(fileId);
+  const handleClickBredcrumb = (view: CurrentView) => {
+    setCurrentView(view);
+  };
+
+  const viewToDisplay = (currentView: CurrentView) => {
+    if (currentView === CurrentView.Knowledge) {
+      return (
+        <KnowledgeContainer
+          knowledgeFile={file}
+          onKnowledgeFileChange={handleFileChange}
+          onKnowledgeFileUpload={() => handleFileUpload}
+        />
+      );
+    }
   };
 
   return (
     <Grid p={6}>
       <Center>
-        <Breadcrumbs />
+        <Breadcrumbs
+          currentView={currentView}
+          onClick={(view) => handleClickBredcrumb(view)}
+        />
       </Center>
-      <UploadComponent
-        file={file}
-        onFileChange={(file) => handleFileChange(file)}
-        onUpload={handleFileUpload}
-      />
-      <FileTable
-        data={fakeKnowledgebase}
-        onDelete={(fileId) => handleDelete(fileId)}
-      />
+
+      {viewToDisplay(currentView)}
     </Grid>
   );
 };

@@ -1,39 +1,44 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-export const Breadcrumbs: React.FC = () => {
-  const location = useLocation();
-  const { pathname } = location;
+export enum CurrentView {
+  Knowledge,
+  Exams,
+  Questions,
+}
 
-  // Assuming your paths are like /knowledge, /exams, /questions
-  //   const pathSnippets = pathname.split("/").filter((i) => i);
+export interface BreadcrumbsProps {
+  currentView: CurrentView;
+  onClick: (view: CurrentView) => void;
+}
 
-  // Match the paths for your breadcrumbs
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+  currentView,
+  onClick,
+}) => {
   const breadcrumbItems = [
-    { path: "/knowledge", label: "Your Knowledge" },
-    { path: "/exams", label: "Your Exams" },
-    { path: "/questions", label: "Your Questions" },
+    {
+      label: "Your Knowledge",
+      view: CurrentView.Knowledge,
+    },
+    { label: "Your Exams", view: CurrentView.Exams },
+    {
+      label: "Your Questions",
+      view: CurrentView.Questions,
+    },
   ];
-
-  //   function doesUrlContainWord(url: string, word: string): boolean {
-  //     // Check if the 'word' is part of the URL path
-  //     return url.includes(word);
-  //   }
-
-  //   // Usage example:
-  //   const url = "/your-knowledge/exams";
-  //   const word = "exams";
 
   return (
     <Breadcrumb>
       {breadcrumbItems.map((item, index) => (
-        <BreadcrumbItem key={index} isCurrentPage={pathname === item.path}>
+        <BreadcrumbItem key={index}>
           <BreadcrumbLink
             as={Link}
-            fontWeight={pathname === item.path ? "bold" : "normal"}
+            fontWeight={currentView === item.view ? "bold" : "normal"}
             fontSize="2xl"
             color="teal.600"
+            onClick={() => onClick(item.view)}
           >
             {item.label}
           </BreadcrumbLink>
