@@ -24,7 +24,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     },
     { label: "Your Exams", view: CurrentView.Exams },
     {
-      label: "Your Questions",
+      label: "Generate!",
       view: CurrentView.Questions,
     },
   ];

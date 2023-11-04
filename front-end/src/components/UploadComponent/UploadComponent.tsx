@@ -8,6 +8,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { AttachmentIcon } from "@chakra-ui/icons";
 
 export const UploadComponent = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -56,7 +57,7 @@ export const UploadComponent = () => {
         />
         <Button
           onClick={() => inputRef.current?.click()} // Delegate click to the hidden input
-          leftIcon={<UploadIcon />} // Replace with actual icon
+          leftIcon={<AttachmentIcon />} // Replace with actual icon
         >
           {file ? file.name : "Choose file"}
         </Button>

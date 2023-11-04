@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CurrentView, Breadcrumbs } from "../../components/Breadcrumbs";
 import { KnowledgeContainer } from "../Knowledge";
 import { ExamContainer } from "../Exam";
-import { QuestionsContainer } from "../Question";
+import { GenerateContainer } from "../Generate";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -45,7 +45,7 @@ export const ProjectPage = () => {
       );
     }
     if (currentView === CurrentView.Questions) {
-      return <QuestionsContainer />;
+      return <GenerateContainer />;
     }
   };
 
