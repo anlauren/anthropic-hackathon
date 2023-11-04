@@ -3,10 +3,14 @@ import { Button, Grid, Skeleton } from "@chakra-ui/react";
 import { useGenerateQuestions } from "../../hooks/useGetGenerateQuestions";
 import { Box, VStack, Text, Heading, Divider } from "@chakra-ui/react";
 
-export const GenerateContainer: React.FC = () => {
-  const { data, isLoading, refetch } = useGenerateQuestions(
-    "ADD THE STRING HERE"
-  ); // TODO: fix this
+export interface GenerateContainerProps {
+  myExamQuestion: string;
+}
+
+export const GenerateContainer: React.FC<GenerateContainerProps> = ({
+  myExamQuestion,
+}) => {
+  const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion); // TODO: fix this
 
   const handleButtonClick = () => {
     refetch();

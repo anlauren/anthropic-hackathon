@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export enum CurrentView {
   Knowledge,
@@ -30,7 +31,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   ];
 
   return (
-    <Breadcrumb>
+    <Breadcrumb separator={<ChevronRightIcon color="gray.500" />}>
       {breadcrumbItems.map((item, index) => (
         <BreadcrumbItem key={index}>
           <BreadcrumbLink

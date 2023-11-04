@@ -10,6 +10,7 @@ export const ProjectPage = () => {
   const [currentView, setCurrentView] = useState<CurrentView>(
     CurrentView.Knowledge
   );
+  const [myExamQuestion, setMyExamQuestion] = useState<string>("");
 
   const handleFileChange = (file: File | null) => {
     if (file) {
@@ -19,6 +20,10 @@ export const ProjectPage = () => {
 
   const handleFileUpload = (fileId: string) => {
     alert(fileId);
+  };
+
+  const handleTypeExamQuestion = (myExamQuestion: string) => {
+    setMyExamQuestion(myExamQuestion);
   };
 
   const handleClickBredcrumb = (view: CurrentView) => {
@@ -41,11 +46,14 @@ export const ProjectPage = () => {
           examFile={file}
           onExamFileChange={handleFileChange}
           onExamFileUpload={() => handleFileUpload}
+          onTypeExamQuestion={(myExamQuestion) =>
+            handleTypeExamQuestion(myExamQuestion)
+          }
         />
       );
     }
     if (currentView === CurrentView.Questions) {
-      return <GenerateContainer />;
+      return <GenerateContainer myExamQuestion={myExamQuestion} />;
     }
   };
 
