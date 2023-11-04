@@ -1,0 +1,11 @@
+- What led to the development of farming communities during the Neolithic period?
+- What was a major advantage of living in farming villages compared to earlier hunter-gatherer groups?
+- How did the food surplus produced by farming allow for new developments in these Neolithic communities?
+- What are two types of craftspeople that emerged as not everyone needed to farm anymore?
+- What were two advances in tools and materials during the late Neolithic period?
+- What is the name of the period between 3000 B.C. and 1200 B.C. when bronze became widely used?
+- What did Neolithic people trade their surplus food for?
+- What is specialization?
+- What did craftspeople use plant fibers for?
+- Before wool and fabrics, what did early humans wear?
+- What metal did toolmakers start working with before bronze?
