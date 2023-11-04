@@ -2,8 +2,11 @@ import React from "react";
 import { Button, Grid, Skeleton } from "@chakra-ui/react";
 import { useGenerateQuestions } from "../../hooks/useGetGenerateQuestions";
 import { Box, VStack, Text, Heading, Divider } from "@chakra-ui/react";
+
 export const GenerateContainer: React.FC = () => {
-  const { data, isLoading, refetch } = useGenerateQuestions("fdfdfd");
+  const { data, isLoading, refetch } = useGenerateQuestions(
+    "ADD THE STRING HERE"
+  ); // TODO: fix this
 
   const handleButtonClick = () => {
     refetch();
