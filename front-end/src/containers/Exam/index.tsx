@@ -10,7 +10,7 @@ export interface ExamProps {
   onExamDelete?: (fileId: string) => void;
 }
 
-export const KnowledgeContainer: React.FC<ExamProps> = ({
+export const ExamContainer: React.FC<ExamProps> = ({
   examFile,
   onExamFileChange,
   onExamFileUpload,

@@ -2,6 +2,7 @@ import { Center, Grid } from "@chakra-ui/react";
 import { useState } from "react";
 import { CurrentView, Breadcrumbs } from "../../components/Breadcrumbs";
 import { KnowledgeContainer } from "../Knowledge";
+import { ExamContainer } from "../Exam";
 
 export const ProjectPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -35,10 +36,10 @@ export const ProjectPage = () => {
     }
     if (currentView === CurrentView.Exams) {
       return (
-        <KnowledgeContainer
-          knowledgeFile={file}
-          onKnowledgeFileChange={handleFileChange}
-          onKnowledgeFileUpload={() => handleFileUpload}
+        <ExamContainer
+          examFile={file}
+          onExamFileChange={handleFileChange}
+          onExamFileUpload={() => handleFileUpload}
         />
       );
     }
