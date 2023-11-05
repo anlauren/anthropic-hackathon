@@ -80,18 +80,18 @@ agent = initialize_agent(
         agent='chat-conversational-react-description',
         tools=tools,
         llm=llm_claude,
-        verbose=True,
+        verbose=False,
         max_iterations=3,
         early_stopping_method='generate',
         memory=conversational_memory
         )
 
 
-class GenerateAgentResponse:
+class AgentService:
 
-    def generate_agent_response(self, user_input: str) -> str:
+    async def generate_agent_response(self, user_input: str) -> str:
         response =  agent(user_input)
-        if response is not None:
+        if response is None:
             raise Exception("No response from agent")
         
         return response["output"]
