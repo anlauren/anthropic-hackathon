@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   Button,
   VStack,
@@ -24,6 +24,7 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   // This function is a thin wrapper around the passed in `onFileChange`
   // to handle the null check and only pass a File if one exists.
@@ -33,6 +34,7 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
   };
 
   const handleUploadClick = async () => {
+    setLoading(true);
     if (file) {
       console.log("Uploading:", file);
       const response = await uploadKnowledgeBase(file);
@@ -47,6 +49,7 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
         isClosable: true,
       });
     }
+    setLoading(false);
   };
 
   return (
@@ -79,7 +82,7 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
             isDisabled={!file}
             width="full"
           >
-            Upload
+            {!isLoading ? "Upload" : "Loading..."}
           </Button>
           {file && <Text fontSize="sm">File selected: {file.name}</Text>}
         </VStack>
