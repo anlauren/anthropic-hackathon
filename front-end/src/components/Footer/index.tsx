@@ -1,13 +1,13 @@
 import React from "react";
-import { Box, Container, Image, Text, Flex } from "@chakra-ui/react";
-import MyLogo from "../../assets/logo.png";
+import { Box, Container, Text, Flex } from "@chakra-ui/react";
+import { Logo } from "../Logo";
 
 const Footer: React.FC = () => {
   return (
-    <Box as="footer" bg="teal.300" py="4">
-      <Container maxW="container.xl">
+    <Box as="footer" bg="teal.300" px="6">
+      <Container maxW="container.2xl">
         <Flex alignItems="center" justifyContent="space-between">
-          <Image src={MyLogo} alt="Logo" boxSize="50px" />
+          <Logo />
           <Text>
             Made with{" "}
             <span role="img" aria-label="heart">

@@ -124,22 +124,63 @@ export const fakeKnowledgebaseHistory: FileData[] = [
   {
     fileId: "1",
     title: "History book on WorlWar 2 by Anthony Collins",
-    description: "string",
+    description: "A US view on WW2",
     fileName: "collins.pdf",
     dateOfUpload: "10-Aug-2023",
   },
   {
     fileId: "2",
     title: "WorlWar 2 by Mark Twee",
-    description: "string",
+    description: "The USSR Contribution in the Pacific arena",
     fileName: "twee.pdf",
     dateOfUpload: "11-Aug-2023",
   },
   {
     fileId: "3",
     title: "USA during WW2 by Josh Omak",
-    description: "string",
+    description: "The USA contribution in the Pacific arena",
     fileName: "omak.pdf",
     dateOfUpload: "09-Aug-2023",
+  },
+];
+
+export const fakeExamsHistory: FileData[] = [
+  {
+    fileId: "1",
+    title: "Exams paper 2020-2023",
+    description: "Previous mock exams",
+    fileName: "paper_2020_2023.pdf",
+    dateOfUpload: "11-Aug-2023",
+  },
+  {
+    fileId: "2",
+    title: "Sample Exam Papers",
+    description: "Practice for the real deal",
+    fileName: "sample_exam_papers.pdf",
+    dateOfUpload: "15-Aug-2023",
+  },
+
+  {
+    fileId: "3",
+    title: "Mock Exam Solutions",
+    description: "Answers and explanations for mock exams",
+    fileName: "mock_exam_solutions.pdf",
+    dateOfUpload: "20-Aug-2023",
+  },
+
+  {
+    fileId: "4",
+    title: "Exam Tips and Tricks",
+    description: "Strategies to ace your exams",
+    fileName: "exam_tips_and_tricks.pdf",
+    dateOfUpload: "25-Aug-2023",
+  },
+
+  {
+    fileId: "5",
+    title: "Revision Timetable",
+    description: "Plan your study schedule for exams",
+    fileName: "revision_timetable.pdf",
+    dateOfUpload: "30-Aug-2023",
   },
 ];
