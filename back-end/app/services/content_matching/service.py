@@ -35,5 +35,5 @@ class ContentMatchingService:
   def get_content_related_to_question(self, question: str) -> str:
     vectorstore = Pinecone(index, embeddings.embed_query, text_field)
 
-    docs = vectorstore.similarity_search(question)
+    docs = vectorstore.similarity_search(question, k=1)
     return docs[0].page_content

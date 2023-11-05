@@ -17,7 +17,6 @@ async def ingest_knowledge_base(knowledge: UploadFile = File(...)) -> str:
 	# Read the contents of the file
 	knowledge_contents = await knowledge.read()
 	knowledge_string = knowledge_contents.decode("utf-8")
-	print(knowledge_string)
 
 	response = knowledge_service.ingest_knowledge(knowledge=knowledge_string)
 	print(response)

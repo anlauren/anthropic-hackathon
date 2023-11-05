@@ -9,7 +9,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { AttachmentIcon } from "@chakra-ui/icons";
-import { uploadKnowledgeBase } from "../../api";
+
 
 export const UploadComponent = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -23,12 +23,10 @@ export const UploadComponent = () => {
     }
   };
 
-  const handleUpload = async () => {
+  const handleUpload = () => {
     if (file) {
       // Handle the file upload process here
       console.log("Uploading:", file);
-      const response = await uploadKnowledgeBase(file);
-      console.log("Response:", response);
       // Display a toast notification
       toast({
         title: "File uploaded.",

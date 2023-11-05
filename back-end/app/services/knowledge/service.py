@@ -5,7 +5,6 @@ knowledge.service.py
 import openai
 import os
 import pinecone
-import requests
 
 from langchain.vectorstores import Pinecone
 from langchain.embeddings import OpenAIEmbeddings
@@ -48,7 +47,7 @@ def upload_documents_to_vector_db(documents):
 
     
     index = pinecone.Index(INDEX_NAME)
-    # index.delete(delete_all=True, namespace='')
+    index.delete(delete_all=True, namespace='')
 
     docsearch = Pinecone.from_documents(documents, embeddings, index_name=INDEX_NAME)
     return 
@@ -58,8 +57,6 @@ def split_documents(document: str):
     """
     Split documents to be uploaded to the DB
     """
-    print(document)
-    print()
     # Splitter
     headers_to_split_on = [
     ("#", "Title"),

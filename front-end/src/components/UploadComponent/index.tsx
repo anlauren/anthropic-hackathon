@@ -9,6 +9,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { AttachmentIcon } from "@chakra-ui/icons";
+import { uploadKnowledgeBase } from "../../api";
 
 export interface UploadComponentProps {
   file: File | null;
@@ -31,9 +32,12 @@ export const UploadComponent: React.FC<UploadComponentProps> = ({
     onFileChange(files ? files[0] : null); // Pass the first file or null
   };
 
-  const handleUploadClick = () => {
+  const handleUploadClick = async () => {
     if (file) {
-      onUpload(); // Delegate the upload process to the parent component
+      console.log("Uploading:", file);
+      const response = await uploadKnowledgeBase(file);
+      console.log("Response:", response);
+      // onUpload(); // Delegate the upload process to the parent component
     } else {
       toast({
         title: "No file selected.",

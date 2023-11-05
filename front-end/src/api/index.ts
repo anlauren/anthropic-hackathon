@@ -19,7 +19,7 @@ export const getAlternativeQuestions = async (
 
 export const uploadKnowledgeBase = async (knowledgeBase: File): Promise<string> => {
   const formData = new FormData();
-  formData.append("knowledge_base", knowledgeBase);
+  formData.append("knowledge", knowledgeBase);
 
   try {
     const response = await axiosInstance.post("/knowledge/new", formData, {
