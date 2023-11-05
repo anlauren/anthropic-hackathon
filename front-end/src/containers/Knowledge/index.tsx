@@ -1,9 +1,6 @@
 import { FileTable } from "../../components/FileTable";
 import { UploadComponent } from "../../components/UploadComponent";
-import {
-  fakeKnowledgebaseEarlyAgRevolution,
-  fakeKnowledgebaseHistory,
-} from "../../fakeData";
+import { fakeKnowledgebaseEarlyAgRevolution } from "../../fakeData";
 import { Grid } from "@chakra-ui/react";
 
 export interface KnowledgeProps {

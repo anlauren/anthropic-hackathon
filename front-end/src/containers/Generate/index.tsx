@@ -10,7 +10,7 @@ export interface GenerateContainerProps {
 export const GenerateContainer: React.FC<GenerateContainerProps> = ({
   myExamQuestion,
 }) => {
-  const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion); // TODO: fix this
+  const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion);
 
   const handleButtonClick = () => {
     refetch();
