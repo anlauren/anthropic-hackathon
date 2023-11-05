@@ -5,3 +5,4 @@ back-end/.env
 *.pyc
 __idea__/
 back-end/.venv/
+.DS_Store
