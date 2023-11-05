@@ -120,7 +120,35 @@ export const fakeKnowledgebaseHardwareFundamentals: FileData[] = [
   },
 ];
 
-export const fakeKnowledgebaseHistory: FileData[] = [
+export const fakeKnowledgebaseEarlyAgRevolution: FileData[] = [
+  {
+    fileId: "1",
+    title: "Seeds of Change: Dawn of Agriculture by Amelia Sowerfield",
+    description:
+      "Unearthing the origins of early agriculture and its impact on societies",
+    fileName: "sowerfield.pdf",
+    dateOfUpload: "20-Nov-2023",
+  },
+  {
+    fileId: "2",
+    title: "Cultivating Civilization: A Farmer's Legacy by James Plowman",
+    description:
+      "Exploring the transition from hunter-gatherer to agricultural societies",
+    fileName: "plowman.pdf",
+    dateOfUpload: "21-Nov-2023",
+  },
+  {
+    fileId: "3",
+    title:
+      "Harvesting Progress: Tools and Techniques in Early Agriculture by Lily Tillage",
+    description:
+      "Tracing the evolution of farming practices in ancient civilizations",
+    fileName: "tillage.pdf",
+    dateOfUpload: "19-Nov-2023",
+  },
+];
+
+export const fakeKnowledgebaseHistoryAgriculture: FileData[] = [
   {
     fileId: "1",
     title: "History book on WorlWar 2 by Anthony Collins",
