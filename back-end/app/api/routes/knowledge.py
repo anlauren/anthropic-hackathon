@@ -8,16 +8,12 @@ knowledge_service = KnowledgeService()
 async def ingest_knowledge_base(knowledge: UploadFile = File(...)) -> str:
 
 	# Check the file extension
-	if not knowledge.filename.endswith(".md"):
+	if not ( knowledge.filename.endswith(".md") or knowledge.filename.endswith(".pdf") ):
 		raise HTTPException(
 			status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
-			detail="Only markdown files (.md) are accepted."
+			detail="Only markdown files (.md) and (.pdf) are accepted."
 		)
-	
-	# Read the contents of the file
-	knowledge_contents = await knowledge.read()
-	knowledge_string = knowledge_contents.decode("utf-8")
-
-	response = knowledge_service.ingest_knowledge(knowledge=knowledge_string)
+	print('ingesting knowledge')
+	response = await knowledge_service.ingest_knowledge(knowledge_binary=knowledge.file, filename=knowledge.filename)
 	print(response)
 	return response["message"]
