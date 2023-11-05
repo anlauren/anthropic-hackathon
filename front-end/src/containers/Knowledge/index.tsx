@@ -1,6 +1,6 @@
 import { FileTable } from "../../components/FileTable";
 import { UploadComponent } from "../../components/UploadComponent";
-import { fakeKnowledgebaseHardwareFundamentals } from "../../fakeData";
+import { fakeKnowledgebaseEarlyAgRevolution } from "../../fakeData";
 import { Grid } from "@chakra-ui/react";
 
 export interface KnowledgeProps {
@@ -24,7 +24,7 @@ export const KnowledgeContainer: React.FC<KnowledgeProps> = ({
         onUpload={() => onKnowledgeFileUpload()}
       />
       <FileTable
-        data={fakeKnowledgebaseHardwareFundamentals}
+        data={fakeKnowledgebaseEarlyAgRevolution}
         onDelete={(fileId) => onKnowledgeDelete && onKnowledgeDelete(fileId)}
       />
     </Grid>

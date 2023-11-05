@@ -1,6 +1,6 @@
 import { FileTable } from "../../components/FileTable";
 import { UploadComponent } from "../../components/UploadComponent";
-import { fakeKnowledgebaseHistory } from "../../fakeData";
+import { fakeExamsHistory } from "../../fakeData";
 import { Button, Grid, Textarea } from "@chakra-ui/react";
 
 export interface ExamProps {
@@ -39,7 +39,7 @@ export const ExamContainer: React.FC<ExamProps> = ({
       </Button>
     </Grid>
     <FileTable
-      data={fakeKnowledgebaseHistory}
+      data={fakeExamsHistory}
       onDelete={(fileId) => onExamDelete && onExamDelete(fileId)}
     />
   </Grid>

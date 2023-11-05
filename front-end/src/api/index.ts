@@ -16,16 +16,17 @@ export const getAlternativeQuestions = async (
   return response.data;
 };
 
-
-export const uploadKnowledgeBase = async (knowledgeBase: File): Promise<string> => {
+export const uploadKnowledgeBase = async (
+  knowledgeBase: File
+): Promise<string> => {
   const formData = new FormData();
   formData.append("knowledge", knowledgeBase);
 
   try {
     const response = await axiosInstance.post("/knowledge/new", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
   } catch (error) {
@@ -33,6 +34,7 @@ export const uploadKnowledgeBase = async (knowledgeBase: File): Promise<string> 
     throw error;
   }
 };
+
 
 export const generateChatAgentResponse = async (userInput: string): Promise<string> => {
   try {
@@ -45,3 +47,4 @@ export const generateChatAgentResponse = async (userInput: string): Promise<stri
     throw error;
   }
 };
+

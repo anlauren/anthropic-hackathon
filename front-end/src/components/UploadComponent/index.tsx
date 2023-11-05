@@ -20,7 +20,7 @@ export interface UploadComponentProps {
 export const UploadComponent: React.FC<UploadComponentProps> = ({
   file,
   onFileChange,
-  onUpload,
+  // onUpload,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();

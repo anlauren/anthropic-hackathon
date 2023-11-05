@@ -11,8 +11,10 @@ export interface GenerateContainerProps {
 export const GenerateContainer: React.FC<GenerateContainerProps> = ({
   myExamQuestion,
 }) => {
+
   const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion); // TODO: fix this
   const [responses, setResponses] = useState<{ [key: number]: string }>({}); // State to hold responses as an object
+
 
 
   const handleButtonClick = () => {
