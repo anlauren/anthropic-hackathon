@@ -5,6 +5,8 @@ knowledge.service.py
 import openai
 import os
 import pinecone
+import io
+import zipfile
 
 from langchain.vectorstores import Pinecone
 from langchain.embeddings import OpenAIEmbeddings
@@ -32,6 +34,11 @@ openai.api_base = RESOURCE_ENDPOINT
 
 # Instantiate Pinecone client
 pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment=os.getenv("PINECONE_ENV"))
+
+
+def extract_title(text: str) -> str:
+    # Split the text into lines and return the first line
+    return text.split('\n', 1)[0]
 
 
 def upload_documents_to_vector_db(documents):
@@ -79,7 +86,11 @@ def split_documents_pdf(document: str):
     
     # Split each documents in chunks 
     list_texts = text_splitter.split_text(document)
-    list_documents = [Document(page_content=text, metadata={'file_type': 'pdf'}) for text in list_texts]
+    title = extract_title(list_texts[0])
+    if title == '':
+        title = 'pdf' 
+
+    list_documents = [Document(page_content=text, metadata={'title': title}) for text in list_texts]
     return list_documents
 
 
@@ -93,6 +104,8 @@ class KnowledgeService:
             list_documents = self.read_knowledge_base_md(knowledge_binary)
         elif filename.endswith(".pdf"):
             list_documents = await self.read_knowledge_base_pdf(knowledge_binary)
+        elif filename.endswith(".zip"):
+            list_documents = await self.read_knowledge_base_zip(knowledge_binary)
         else:
             raise Exception("File type not supported")
         
@@ -106,7 +119,6 @@ class KnowledgeService:
 
         file_bytes = knowledge.read()
         knowledge_string = await async_process_pdf(file_bytes)
-        print(knowledge_string[:1000])
         list_documents = split_documents_pdf(knowledge_string)
         print(len(list_documents))
 
@@ -123,3 +135,31 @@ class KnowledgeService:
         list_documents = split_documents_md(knowledge_string)
         return list_documents
         
+    async def read_knowledge_base_zip(self, knowledge: BinaryIO):
+        """
+        Process the zip file and read contents.
+        """
+        # Make sure to seek to the start of the file
+        knowledge.seek(0)
+        file_content = knowledge.read()
+
+        with io.BytesIO(file_content) as memory_file:
+            with zipfile.ZipFile(memory_file, 'r') as zip_ref:
+                # Process each file inside the zip
+                list_documents = []
+                for file_info in zip_ref.infolist():
+                    with zip_ref.open(file_info) as file:
+                        
+                        if file_info.filename.endswith(".md"):
+                            file_contents = file.read().decode('utf-8')
+                            documents = split_documents_md(file_contents)
+                            list_documents.extend(documents)
+                    
+                        elif file_info.filename.endswith(".pdf"):
+                            # Since `async_process_pdf` expects bytes, we create a new BytesIO object
+                            file_bytes =  file.read()
+                            knowledge_string = await async_process_pdf(file_bytes)
+                            documents = split_documents_pdf(knowledge_string)
+                            list_documents.extend(documents)
+                
+                return list_documents
