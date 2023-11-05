@@ -34,3 +34,10 @@ export const uploadKnowledgeBase = async (
     throw error;
   }
 };
+
+export const postAgentResponse = async (userInput: string): Promise<string> => {
+  const response = await axiosInstance.post("/agent/chat-agent", {
+    user_input: userInput,
+  });
+  return response.data;
+};
