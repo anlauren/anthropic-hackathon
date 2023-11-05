@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Grid, HStack, Skeleton, Spacer } from "@chakra-ui/react";
 import { useGenerateQuestions } from "../../hooks/useGetGenerateQuestions";
-import { Box, VStack, Text, Heading, Divider } from "@chakra-ui/react";
+import { Box, VStack, Text, Heading } from "@chakra-ui/react";
 import { generateChatAgentResponse } from "../../api";
 
 export interface GenerateContainerProps {
@@ -11,30 +11,34 @@ export interface GenerateContainerProps {
 export const GenerateContainer: React.FC<GenerateContainerProps> = ({
   myExamQuestion,
 }) => {
-
+  const [isLoadinAnswer, setIsLoadingAnswer] = useState<boolean>(false);
   const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion); // TODO: fix this
   const [responses, setResponses] = useState<{ [key: number]: string }>({}); // State to hold responses as an object
-
-
 
   const handleButtonClick = () => {
     refetch();
   };
 
-  const handleGenerateResponseClick = async (question: string, index: number) => {
+  const handleGenerateResponseClick = async (
+    question: string,
+    index: number
+  ) => {
+    setIsLoadingAnswer(true);
+
     // If we already have the response, do not fetch it again
     if (responses[index]) return;
 
     try {
       const response = await generateChatAgentResponse(question);
-      setResponses(prev => ({ ...prev, [index]: response }));
+      setResponses((prev) => ({ ...prev, [index]: response }));
     } catch (error) {
       console.error("Failed to generate chat agent response:", error);
     }
+    setIsLoadingAnswer(false);
   };
 
   const questions = data && data.split("\n").filter((q) => q.trim() !== "");
-
+  console.log("isLoadinAnswer", isLoadinAnswer);
   return (
     <Grid p={10}>
       <Button
@@ -70,14 +74,21 @@ export const GenerateContainer: React.FC<GenerateContainerProps> = ({
                 <Button
                   colorScheme="blue"
                   onClick={() => handleGenerateResponseClick(question, index)}
-                  isLoading={responses[index] === 'loading'}
+                  isLoading={responses[index] === "loading"}
                   disabled={!!responses[index]}
                 >
                   Generate Answer
                 </Button>
                 <Spacer />
+                {isLoadinAnswer && <Text>GENERATING ANSWERS ...</Text>}
                 {responses[index] && (
-                  <Text p={3} bg="green.100" borderRadius="md" maxW="400px" ml={4} >
+                  <Text
+                    p={3}
+                    bg="green.100"
+                    borderRadius="md"
+                    maxW="400px"
+                    ml={4}
+                  >
                     {responses[index]}
                   </Text>
                 )}
