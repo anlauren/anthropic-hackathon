@@ -15,3 +15,21 @@ export const getAlternativeQuestions = async (
   );
   return response.data;
 };
+
+
+export const uploadKnowledgeBase = async (knowledgeBase: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("knowledge_base", knowledgeBase);
+
+  try {
+    const response = await axiosInstance.post("/knowledge/new", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Upload error:", error);
+    throw error;
+  }
+};
