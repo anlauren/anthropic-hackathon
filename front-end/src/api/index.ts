@@ -35,9 +35,16 @@ export const uploadKnowledgeBase = async (
   }
 };
 
-export const postAgentResponse = async (userInput: string): Promise<string> => {
-  const response = await axiosInstance.post("/agent/chat-agent", {
-    user_input: userInput,
-  });
-  return response.data;
+
+export const generateChatAgentResponse = async (userInput: string): Promise<string> => {
+  try {
+    const response = await axiosInstance.post("/agent/chat-agent", null, {
+      params: { user_input: userInput }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error generating chat agent response:", error);
+    throw error;
+  }
 };
+

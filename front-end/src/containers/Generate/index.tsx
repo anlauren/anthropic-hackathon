@@ -1,7 +1,8 @@
-import React from "react";
-import { Button, Grid, Skeleton } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Button, Grid, HStack, Skeleton, Spacer } from "@chakra-ui/react";
 import { useGenerateQuestions } from "../../hooks/useGetGenerateQuestions";
 import { Box, VStack, Text, Heading, Divider } from "@chakra-ui/react";
+import { generateChatAgentResponse } from "../../api";
 
 export interface GenerateContainerProps {
   myExamQuestion: string;
@@ -10,10 +11,26 @@ export interface GenerateContainerProps {
 export const GenerateContainer: React.FC<GenerateContainerProps> = ({
   myExamQuestion,
 }) => {
-  const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion);
+
+  const { data, isLoading, refetch } = useGenerateQuestions(myExamQuestion); // TODO: fix this
+  const [responses, setResponses] = useState<{ [key: number]: string }>({}); // State to hold responses as an object
+
+
 
   const handleButtonClick = () => {
     refetch();
+  };
+
+  const handleGenerateResponseClick = async (question: string, index: number) => {
+    // If we already have the response, do not fetch it again
+    if (responses[index]) return;
+
+    try {
+      const response = await generateChatAgentResponse(question);
+      setResponses(prev => ({ ...prev, [index]: response }));
+    } catch (error) {
+      console.error("Failed to generate chat agent response:", error);
+    }
   };
 
   const questions = data && data.split("\n").filter((q) => q.trim() !== "");
@@ -44,11 +61,27 @@ export const GenerateContainer: React.FC<GenerateContainerProps> = ({
           <Heading fontSize="xl" mb={4}>
             Generated Questions
           </Heading>
-          <VStack divider={<Divider />} spacing={4} align="stretch">
+          <VStack spacing={4} align="stretch">
             {questions.map((question, index) => (
-              <Text key={index} p={3} bg="gray.100" borderRadius="md">
-                {question.trim()}
-              </Text>
+              <HStack key={index} spacing={4} justify="" align="center">
+                <Text flex="1" p={3} bg="gray.100" borderRadius="md">
+                  {question.trim()}
+                </Text>
+                <Button
+                  colorScheme="blue"
+                  onClick={() => handleGenerateResponseClick(question, index)}
+                  isLoading={responses[index] === 'loading'}
+                  disabled={!!responses[index]}
+                >
+                  Generate Answer
+                </Button>
+                <Spacer />
+                {responses[index] && (
+                  <Text p={3} bg="green.100" borderRadius="md" maxW="400px" ml={4} >
+                    {responses[index]}
+                  </Text>
+                )}
+              </HStack>
             ))}
           </VStack>
         </Box>
