@@ -1,7 +1,7 @@
 pydantic==1.10.2
 # unstructured==0.5.8
 # pyMuPDF==1.22.3
-# pyPDF2==3.0.1
+pyPDF2==3.0.1
 # pytesseract==0.3.10
 langchain==0.0.330
 anthropic
