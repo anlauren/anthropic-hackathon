@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, HStack, Skeleton } from "@chakra-ui/react";
+import { Button, Grid, HStack, Skeleton, Spacer } from "@chakra-ui/react";
 import { useGenerateQuestions } from "../../hooks/useGetGenerateQuestions";
 import { Box, VStack, Text, Heading, Divider } from "@chakra-ui/react";
 import { generateChatAgentResponse } from "../../api";
@@ -59,28 +59,29 @@ export const GenerateContainer: React.FC<GenerateContainerProps> = ({
           <Heading fontSize="xl" mb={4}>
             Generated Questions
           </Heading>
-          <VStack spacing={4}>
-          {questions && questions.map((question, index) => (
-            <HStack key={index} align="start">
-              <Text p={3} bg="gray.100" borderRadius="md">
-                {question.trim()}
-              </Text>
-              <Button
-                colorScheme="blue"
-                onClick={() => handleGenerateResponseClick(question, index)}
-                isLoading={responses[index] === 'loading'}
-                disabled={!!responses[index]}
-              >
-                Generate Answer
-              </Button>
-              {responses[index] && (
-                <Text p={3} bg="green.100" borderRadius="md">
-                  {responses[index]}
+          <VStack spacing={4} align="stretch">
+            {questions.map((question, index) => (
+              <HStack key={index} spacing={4} justify="" align="center">
+                <Text flex="1" p={3} bg="gray.100" borderRadius="md">
+                  {question.trim()}
                 </Text>
-              )}
-            </HStack>
-          ))}
-        </VStack>
+                <Button
+                  colorScheme="blue"
+                  onClick={() => handleGenerateResponseClick(question, index)}
+                  isLoading={responses[index] === 'loading'}
+                  disabled={!!responses[index]}
+                >
+                  Generate Answer
+                </Button>
+                <Spacer />
+                {responses[index] && (
+                  <Text p={3} bg="green.100" borderRadius="md" maxW="400px" ml={4} >
+                    {responses[index]}
+                  </Text>
+                )}
+              </HStack>
+            ))}
+          </VStack>
         </Box>
       )}
     </Grid>
